@@ -17,6 +17,8 @@ public interface TADList {
      */
     public boolean IsEmpty();
     
+    public void Empty();
+    
     /**
      * Add a new element to the list
      * @param element new element to be added

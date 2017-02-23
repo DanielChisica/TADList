@@ -25,22 +25,30 @@ public class List implements TADList{
 
     @Override
     public boolean IsEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return newNode==null;
     }
+    
 
     @Override
     public void add(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        newNode= new Node(newNode, element);
     }
 
     @Override
     public int find(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       boolean finded;
+       Node nodo=new Node(newNode, element);
+        while (finded=false) {
+            
+        }
     }
 
     @Override
     public Object delete(Object element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Node pos=new Node(newNode, element);
+        while (pos!=null && pos.getElement()!=element) {            
+            pos
+        }
     }
 
     @Override
@@ -50,13 +58,26 @@ public class List implements TADList{
 
     @Override
     public void substitute(Object currentElement, Object newElement) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Node n= search(currentElement);
+        if (n!=null){
+            newElement=n.getElement();
+        }
+        else{
+            throw new NoSuch
+        }
     }
 
     @Override
     public Iterator iterator() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void Empty() {
+       newNode=null;
+    }
+
+   
     
     
 }

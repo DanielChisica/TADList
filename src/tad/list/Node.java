@@ -31,11 +31,11 @@ public class Node {
         this.nextNde = nde;
     }
 
-    public Object getElment() {
+    public Object getElement() {
         return element;
     }
 
-    public void setElment(Object elmenet) {
+    public void setElement(Object elmenet) {
         this.element = elmenet;
     }
     private Node nextNde;
