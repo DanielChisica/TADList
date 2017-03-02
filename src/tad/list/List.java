@@ -14,13 +14,21 @@ import java.util.Iterator;
  */
 public class List implements TADList{
     private Node newNode;
+  
     
     public List(){
         newNode=null;
     }
     
-    public List(Object element){
+    public List(List list1){
+       newNode=new Node(list1.newNode);
+       Node list=list1.newNode;
+       Node pos=newNode;
        
+        while (list!=null) {            
+            pos=new Node(list);
+            list=list.getNde();
+        }
     }
 
     @Override
@@ -36,11 +44,11 @@ public class List implements TADList{
 
     @Override
     public int find(Object element) {
-       boolean finded;
-       Node nodo=new Node(newNode, element);
-        while (finded=false) {
+       Node nde=new Node(element);
+        while (nde!=null && element.equals(nde)) {            
             
         }
+        return ;
     }
 
     @Override
@@ -58,7 +66,7 @@ public class List implements TADList{
 
     @Override
     public void substitute(Object currentElement, Object newElement) {
-        Node n= search(currentElement);
+        Node n= find(currentElement);
         if (n!=null){
             newElement=n.getElement();
         }
