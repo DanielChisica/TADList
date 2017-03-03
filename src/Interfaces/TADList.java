@@ -35,9 +35,8 @@ public interface TADList {
     /**
      * Delete a element in the list
      * @param element the element to be deleted
-     * @return The same deleted element
      */
-    public Object delete(Object element);
+    public void delete(Object element);
     
     /**
      * Ask to the list, if a element is contained on it
@@ -45,9 +44,9 @@ public interface TADList {
      * @return Boolean: True if the list contains the element, false it isn´t
      */
     public boolean contains(Object element);
-    
+      
     /**
-     * Substitue a new element in the list on the position of a current element
+     * Substitute a new element in the list on the position of a current element
      * @param currentElement
      * @param newElement 
      */
