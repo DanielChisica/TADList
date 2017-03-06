@@ -6,18 +6,19 @@
 package tad.list;
 
 import Interfaces.TADList;
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
- * Is a model and also a controller of a to do list
+ * It's a model and also a controller of a to do list
  * @author Daniel Jimenez
  * @since 3 March 2017
  */
-public class List implements TADList{
+public class List implements TADList, Serializable{
     private Node newNode;
   
     /**
-     * Sets a list with its node as null
+     * Sets a list with it node as null
      */
     public List(){
         newNode=null;
@@ -48,7 +49,7 @@ public class List implements TADList{
     }
     
     /**
-     * Adds a element to the task list
+     * Adds an element to the task list
      * @param element New element to be placed in the list
      */
     @Override
@@ -57,7 +58,7 @@ public class List implements TADList{
     }
     
     /**
-     * Searches a element into the task list
+     * Searches an element into the task list
      * @param element The object to be searched
      * @return The node with its reference
      */
@@ -70,9 +71,9 @@ public class List implements TADList{
     }
   
     /**
-     * Defines if a list contains a element
+     * Defines if a list contains an element
      * @param element the element to be searched
-     * @return True if it contains it, false isn't
+     * @return True if the list contains it, false isn't
      */
     @Override
     public boolean contains(Object element) {
@@ -95,17 +96,49 @@ public class List implements TADList{
         }
     }
     
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   /**
+   * Method that returns an iterator about the list
+   * @return java.util.Iterator -- The list iterator
+   */
+  public java.util.Iterator iterator() { 
+    return new MyIterator(); 
+  }
+	
+  /*
+   * Class that implements the Iterator
+   */
+  private class MyIterator implements java.util.Iterator {
+    private Node position = newNode;
     
     /**
-     * Cleans a node
+     * Defines if there is other element
+     * @return True if has next, false if doesn't have
+     */
+    public boolean hasNext() { return position != null;}
+    
+    /**
+     * Allows to get the next object
+     * @return The next object
+     * @throws java.util.NoSuchElementException 
+     */
+    public Object next() throws java.util.NoSuchElementException {
+      if (hasNext()) {
+	Object o = position.getElement();
+	position = position.getNde();
+	return o;
+      }
+      throw new java.util.NoSuchElementException();
+    }
+
+    public void remove() {
+      throw new IllegalStateException();
+    }
+  }
+    
+    
+  
+    /**
+     * Cleans the list
      */
     @Override
     public void Empty() {
@@ -113,9 +146,9 @@ public class List implements TADList{
     }
     
     /**
-     * 
-     * @param element
-     * @return 
+     * Not implemented yet
+     * @param element The element to be located
+     * @return An int with the position
      */
     @Override
     public int find(Object element) {
@@ -123,7 +156,7 @@ public class List implements TADList{
     }
     
     /**
-     * Searches in the task list and deletes a element
+     * Searches in the task list and deletes an element
      * @param element the element to be deleted
      */
     @Override

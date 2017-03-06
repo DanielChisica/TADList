@@ -5,11 +5,27 @@
  */
 package GUI;
 import javax.swing.JCheckBox;
+import tad.list.*;
+import Task.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 
 
 /**
- *
- * @author danie_000
+ * The class TaskList is the GUI through the user can adds new tasks and picks
+ * on they if he already done them
+ * @author Daniel Jiménez
+ * @since 3 March 2017
  */
 public class TaskList extends javax.swing.JFrame {
 
@@ -18,7 +34,29 @@ public class TaskList extends javax.swing.JFrame {
      */
     public TaskList() {
         initComponents();
+        read();
+        Iterator it=list1.iterator();
+        while (it.hasNext()) {            
+            jPanel1.add(new JCheckBox((String)it.next(), ((Task)it.next()).isDone()));
+        }
+        this.validate();
+        this.repaint();
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    save(); //To change body of generated methods, choose Tools | Templates.
+                } catch (IOException ex) {
+                    Logger.getLogger(TaskList.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+          
+        });
     }
+    
+   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,16 +117,77 @@ public class TaskList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * When the user press the add button, this method adds the task to the list
+     * and makes the correspondent JCheckbox, also contains the logic for
+     * listening a checkbox event, search the equal task and picks it like done
+     * @param evt The click on the add button
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: 
-       JCheckBox jchk1=new JCheckBox(jTextField1.getText());
-       jPanel1.add(jchk1);
+        Task task1=new Task(jTextField1.getText(), false);
+        list1.add(task1);
+       //JCheckBox jchk1=new JCheckBox(task1.getName());
+       
+       jPanel1.add(new JCheckBox(new AbstractAction(task1.getName()) {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               Task task2=new Task(task1.getName(), true);
+               list1.substitute(list1.search(task1).getElement(),task2 );
+               
+//To change body of generated methods, choose Tools | Templates.
+           }
+       }));
+       
+       
+       
        jPanel1.repaint();
        jPanel1.revalidate();
-        //jPanel1.add();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    /**
+     * Saves the current tasks creating a file
+     * @throws IOException If isn't possible save
+     */
+    public void save() throws IOException {
+       FileOutputStream fos=null;
+       try{
+       fos= new FileOutputStream("list1.obj");
+       ObjectOutputStream oos= new ObjectOutputStream(fos);
+       oos.writeObject((Object)list1);
+       oos.close();
+       fos.close();
+       }
+       
+       catch (FileNotFoundException ex){
+           Logger.getLogger(TaskList.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       finally{
+           try {
+               fos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TaskList.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }
+    }
+    
+    /**
+     * Reads a input file and makes an object from this
+     */
+    public void read(){
+        try {
+            FileInputStream fis = new FileInputStream("list1.obj");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            list1 = (List) ois.readObject();
+            fis.close();
+            ois.close();
+        } catch (Exception e) {
+        }
+        
+    }
+    
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         // TODO add your handling code here:
         jTextField1.setText("");
@@ -128,7 +227,7 @@ public class TaskList extends javax.swing.JFrame {
             }
         });
     }
-
+    List list1=new List();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;

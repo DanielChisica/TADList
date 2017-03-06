@@ -47,8 +47,8 @@ public interface TADList {
       
     /**
      * Substitute a new element in the list on the position of a current element
-     * @param currentElement
-     * @param newElement 
+     * @param currentElement The element in the task
+     * @param newElement The new element
      */
     public void substitute(Object currentElement, Object newElement);
     

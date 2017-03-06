@@ -24,8 +24,8 @@ public class Node {
     }
     
     /**
-     * Places a object in the node and at the same time, make a null reference
-     * @param value 
+     * Places an object in the node and at the same time, make a null reference
+     * @param value The object to be placed in the node
      */
     public Node(Object value){
         this(null,value);
@@ -57,7 +57,7 @@ public class Node {
     }
     
     /**
-     * Puts a element into the current node
+     * Puts an element into the current node
      * @param elmenet The element to be placed
      */
     public void setElement(Object elmenet) {

@@ -6,18 +6,18 @@
 package Task;
 
 /**
- * This class configures a single task with the atrributes: boolean done
+ * This class configures a single task with the attributes: boolean done
  * and its String name 
  * 
  * @author Daniel Jimenez
- * @since 
+ * @since 3 March 2017
  */
 public class Task {
     
     /**
-     * 
-     * @param name
-     * @param done 
+     * The constructor states a task with the input attributes
+     * @param name The name of the task
+     * @param done True if it's done, false isn't
      */
     public Task(String name, boolean done) {
         this.name = name;
@@ -25,32 +25,32 @@ public class Task {
     }
     
     /**
-     * 
-     * @return 
+     * Returns the String with the name
+     * @return The name of the task
      */
     public String getName() {
         return name;
     }
     
     /**
-     * 
-     * @param name 
+     * Sets the name to the task
+     * @param name The String name
      */
     public void setName(String name) {
         this.name = name;
     }
     
     /**
-     * 
-     * @return 
+     * Returns if the task is already done, false isn't
+     * @return The boolean attribute
      */
     public boolean isDone() {
         return done;
     }
     
     /**
-     * 
-     * @param done 
+     * Sets if the task is already done
+     * @param done The input boolean true if the task already done, false isn't
      */
     public void setDone(boolean done) {
         this.done = done;
