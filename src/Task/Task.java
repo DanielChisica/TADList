@@ -5,6 +5,8 @@
  */
 package Task;
 
+import java.io.Serializable;
+
 /**
  * This class configures a single task with the attributes: boolean done
  * and its String name 
@@ -12,7 +14,7 @@ package Task;
  * @author Daniel Jimenez
  * @since 3 March 2017
  */
-public class Task {
+public class Task implements Serializable{
     
     /**
      * The constructor states a task with the input attributes

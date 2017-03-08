@@ -5,12 +5,14 @@
  */
 package tad.list;
 
+import java.io.Serializable;
+
 /**
  *  This class contains a node of a simply linked list
  * @author Daniel Jimenez
  * @since 1 March 2017
  */
-public class Node {
+public class Node implements Serializable{
    /**
     * This constructor replaces the object in the node, and the node with a
     * reference

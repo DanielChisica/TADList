@@ -36,11 +36,20 @@ public class TaskList extends javax.swing.JFrame {
         initComponents();
         read();
         Iterator it=list1.iterator();
-        while (it.hasNext()) {            
-            jPanel1.add(new JCheckBox((String)it.next(), ((Task)it.next()).isDone()));
+        
+       
+        while (it.hasNext()) {  
+            Task t2=(Task) it.next();
+            jPanel1.add(new JCheckBox(t2.getName(),t2.isDone()));
         }
         this.validate();
         this.repaint();
+        
+        
+        while (it.hasNext()) {   
+            Task t1=(Task) it.next();
+            System.out.println(t1.getName()+" "+t1.isDone());
+        }
         
         this.addWindowListener(new java.awt.event.WindowAdapter(){
             @Override
