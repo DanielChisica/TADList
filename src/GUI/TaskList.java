@@ -34,6 +34,7 @@ public class TaskList extends javax.swing.JFrame {
      */
     public TaskList() {
         initComponents();
+        this.setTitle("Task List");
         read();
         Iterator it=list1.iterator();
         
@@ -79,6 +80,7 @@ public class TaskList extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -101,26 +103,38 @@ public class TaskList extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Clean");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addComponent(jButton1)
-                .addContainerGap(128, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -130,7 +144,7 @@ public class TaskList extends javax.swing.JFrame {
     /**
      * When the user press the add button, this method adds the task to the list
      * and makes the correspondent JCheckbox, also contains the logic for
-     * listening a checkbox event, search the equal task and picks it like done
+     * listening a CheckBox event, search the equal task and picks it like done
      * @param evt The click on the add button
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -142,8 +156,22 @@ public class TaskList extends javax.swing.JFrame {
        jPanel1.add(new JCheckBox(new AbstractAction(task1.getName()) {
            @Override
            public void actionPerformed(ActionEvent e) {
-               Task task2=new Task(task1.getName(), true);
-               list1.substitute(list1.search(task1).getElement(),task2 );
+               boolean flag;
+               if (task1.isDone())
+                   flag=false;
+               else
+                   flag=true;
+               Task task2=new Task(task1.getName(), flag);
+               list1.substitute(task1,task2);
+               
+               Iterator it=list1.iterator();
+        
+       
+        while (it.hasNext()) {  
+            Task t2=(Task) it.next();
+            System.out.println(t2.getName()+" "+t2.isDone());
+        }
+               
                
 //To change body of generated methods, choose Tools | Templates.
            }
@@ -202,6 +230,14 @@ public class TaskList extends javax.swing.JFrame {
         jTextField1.setText("");
     }//GEN-LAST:event_jTextField1MouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        list1.Empty();
+        jPanel1.removeAll();
+        jPanel1.revalidate();
+        jPanel1.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -239,6 +275,7 @@ public class TaskList extends javax.swing.JFrame {
     List list1=new List();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
